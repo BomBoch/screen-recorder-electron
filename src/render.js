@@ -11,6 +11,10 @@ const videoElement = document.querySelector("video")
 
 const startBtn = document.getElementById("startBtn")
 startBtn.onclick = (e) => {
+  if (!mediaRecorder) {
+    alert("Plase select video source")
+    return
+  }
   mediaRecorder.start()
   startBtn.classList.add("is-danger")
   startBtn.innerText = "Recording"
@@ -19,6 +23,10 @@ startBtn.onclick = (e) => {
 const stopBtn = document.getElementById("stopBtn")
 
 stopBtn.onclick = (e) => {
+  if (!mediaRecorder) {
+    alert("Plase select video source")
+    return
+  }
   mediaRecorder.stop()
   startBtn.classList.remove("is-danger")
   startBtn.innerText = "Start"
@@ -86,14 +94,14 @@ function handleDataAvailable(e) {
 // Saves the video file on stop
 async function handleStop(e) {
   const blob = new Blob(recordedChunks, {
-    type: "video/webm; codecs=vp9",
+    type: "video/mp4; codecs=H264: ",
   })
 
   const buffer = Buffer.from(await blob.arrayBuffer())
 
   const { filePath } = await dialog.showSaveDialog({
     buttonLabel: "Save video",
-    defaultPath: `vid-${Date.now()}.webm`,
+    defaultPath: `vid-${Date.now()}.mp4`,
   })
 
   if (filePath) {
