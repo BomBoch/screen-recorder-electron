@@ -12,5 +12,10 @@ video {
 
 body {
   text-align: center;
-  padding-top: 20px;
+  padding-top: 12px;
+}
+
+#videoSelectBtn {
+  background-color: #42b883;
+  color: #35495e;
 }
